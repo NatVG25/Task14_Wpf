@@ -1,0 +1,47 @@
+﻿<Window x:Class="Task14.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task14"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="500">
+    <Window.Resources>
+        <DataTemplate x:Key="MyTemplate">
+            <Border x:Name="border" BorderBrush="Green" BorderThickness="3" Padding="5" Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Изображение товара"/>
+                    <Image Grid.Row="0" Grid.Column="1" Width="50" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=Image}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Название товара"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=ProductName}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Цена товара"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Price}"/>
+                </Grid>
+            </Border>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=Category}">
+                    <DataTrigger.Value>
+                        <local:Categories>Appliances</local:Categories>
+                    </DataTrigger.Value>
+                    <Setter TargetName="border" Property="BorderBrush" Value="orange"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel>
+        <TextBlock Name="problemTitle" FontSize="20" Text="Список товаров:"/>
+        <ListBox Name="lstBox" Width="400" Margin="10" ItemTemplate="{StaticResource MyTemplate}" HorizontalContentAlignment="Stretch"/>
+        <Button Content="Добавить" Click="Button_Click"/>
+    </StackPanel>
+   
+</Window>
